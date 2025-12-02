@@ -1,0 +1,18 @@
+{
+  "Comment": "Step Function que recibe parámetros de Lambda y ejecuta Glue Job",
+  "StartAt": "Glue StartJobRun",
+  "States": {
+    "Glue StartJobRun": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::glue:startJobRun.sync",
+      "Parameters": {
+        "JobName": "Superstore-job-v2",
+        "Arguments": {
+          "--input_file.$": "$.input_filename",
+          "--output_folder.$": "$.output_filename"
+        }
+      },
+      "End": true
+    }
+  }
+}
